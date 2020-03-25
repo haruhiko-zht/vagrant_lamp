@@ -60,7 +60,7 @@ cp -p /etc/php.ini /etc/php.ini.org
 sed -i -e 's/expose_php = On/expose_php = Off/g' /etc/php.ini
 sed -i -e 's/post_max_size = 8M/post_max_size = 20M/g' /etc/php.ini
 sed -i -e 's/upload_max_filesize = 2M/upload_max_filesize = 20M/g' /etc/php.ini
-sed -i -e 's/;date.timezone =/date.timezone = "Asia/Tokyo"/g' /etc/php.ini
+sed -i -e 's/;date.timezone =/date.timezone = "Asia\/Tokyo"/g' /etc/php.ini
 sed -i -e 's/;mbstring.language = Japanese/mbstring.language = Japanese/g' /etc/php.ini
 sed -i -e 's/;mbstring.internal_encoding =/mbstring.internal_encoding = UTF-8/g' /etc/php.ini
 sed -i -e 's/;mbstring.http_input =/mbstring.http_input = UTF-8/g' /etc/php.ini
@@ -83,6 +83,7 @@ systemctl enable mysqld
 
 systemctl start httpd
 systemctl enable httpd
+systemctl enalbe php-fpm
 echo -e "<?php\nphpinfo();\n" >/var/www/html/index.php
 
 #echo -------------------------------------------------
@@ -100,6 +101,7 @@ echo -e "<?php\nphpinfo();\n" >/var/www/html/index.php
 #sed -i -e "s/\['AllowNoPassword'\] = false;/\['AllowNoPassword'\] = true;/g" /var/www/html/myadmin/config.inc.php
 
 systemctl restart httpd
+systemctl restart php-fpm
 systemctl restart mysqld
 
 #echo -------------------------------------------------
@@ -116,3 +118,4 @@ cp -p /etc/httpd/conf.d/ssl.conf /etc/httpd/conf.d/ssl.conf.org
 #sed -i -e 's/SSLCertificateKeyFile \/etc\/pki\/tls\/private\/localhost.key/SSLCertificateKeyFile \/etc\/pki\/tls\/apachessl.key/g' /etc/httpd/conf.d/ssl.conf
 
 systemctl restart httpd
+systemctl restart php-fpm

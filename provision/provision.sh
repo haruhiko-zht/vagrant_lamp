@@ -6,6 +6,7 @@
 #echo                    SELinux
 #echo -------------------------------------------------
 
+setenforce 0
 cp -p /etc/selinux/config /etc/selinux/config.bak
 sed -i -e 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
 

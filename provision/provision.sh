@@ -3,7 +3,7 @@
 # You should consider 'ansible' or 'chef'.
 
 #echo -------------------------------------------------
-#echo                    SELinux
+#echo            SELinux (For test machine)
 #echo -------------------------------------------------
 
 setenforce 0
@@ -11,7 +11,7 @@ cp -p /etc/selinux/config /etc/selinux/config.bak
 sed -i -e 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
 
 #echo -------------------------------------------------
-#echo                    Firewall
+#echo           Firewall (For test machine)
 #echo -------------------------------------------------
 
 systemctl stop firewalld
@@ -25,7 +25,7 @@ localectl set-locale LANG=ja_JP.utf8
 #export LC_ALL=C
 
 #echo -------------------------------------------------
-#echo                    Timezone
+#echo                   Timezone
 #echo -------------------------------------------------
 
 timedatectl set-timezone Asia/Tokyo
@@ -71,7 +71,7 @@ sed -i -e 's/;mbstring.detect_order = auto/mbstring.detect_order = auto/g' /etc/
 sed -i -e 's/;mbstring.substitute_character = none/mbstring.substitute_character = none/g' /etc/php.ini
 
 #echo -------------------------------------------------
-#echo                    MySQL(8.x)
+#echo                   MySQL(8.x)
 #echo -------------------------------------------------
 
 dnf -y install php-mysqlnd php-pecl-mysql mysql-server
@@ -79,7 +79,7 @@ systemctl start mysqld
 systemctl enable mysqld
 
 #echo -------------------------------------------------
-#echo                    Apache
+#echo                     Apache
 #echo -------------------------------------------------
 
 systemctl start httpd
@@ -88,15 +88,15 @@ systemctl enalbe php-fpm
 echo -e "<?php\nphpinfo();\n" >/var/www/html/index.php
 
 #echo -------------------------------------------------
-#echo                    phpMyAdmin(v4.9.4)
-#echo                    need yourself command
+#echo                phpMyAdmin(v4.9.5)
+#echo               need yourself command
 #echo -------------------------------------------------
 
 #dnf -y install wget unzip
-#wget https://files.phpmyadmin.net/phpMyAdmin/4.9.4/phpMyAdmin-4.9.4-all-languages.zip
-#unzip phpMyAdmin-4.9.4-all-languages.zip
-#mv phpMyAdmin-4.9.4-all-languages /var/www/html/myadmin
-#rm -rf phpMyAdmin-4.9.4-all-languages.zip
+#wget https://files.phpmyadmin.net/phpMyAdmin/4.9.5/phpMyAdmin-4.9.5-all-languages.zip
+#unzip phpMyAdmin-4.9.5-all-languages.zip
+#mv phpMyAdmin-4.9.5-all-languages /var/www/html/myadmin
+#rm -rf phpMyAdmin-4.9.5-all-languages.zip
 
 #cp -p /var/www/html/myadmin/config.sample.inc.php /var/www/html/myadmin/config.inc.php
 #sed -i -e "s/\['AllowNoPassword'\] = false;/\['AllowNoPassword'\] = true;/g" /var/www/html/myadmin/config.inc.php
@@ -107,7 +107,7 @@ systemctl restart mysqld
 
 #echo -------------------------------------------------
 #echo                    SSL/TLS
-#echo                    need yourself command
+#echo              need yourself command
 #echo -------------------------------------------------
 
 dnf -y install openssl mod_ssl

@@ -1,10 +1,9 @@
 Vagrant.configure("2") do |config|
   # Box name
-  config.vm.box = "centos/8"
+  config.vm.box = "generic/centos8"
 
   # Select version and check update
-  # config.vm.box_version = "1905.1"
-  # config.vm.box_check_update = false
+  config.vm.box_check_update = true
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
@@ -13,8 +12,8 @@ Vagrant.configure("2") do |config|
   # Sync folder
   # See document about sync-type
   # (maybe required vagrant plugin "vagrant-vbguest")
-  # config.vm.synced_folder "./host", "/guest", type: "virtualbox", disabled: false
-  # config.vm.synced_folder ".", "/vagrant", disabled: true
+  #config.vm.synced_folder "./host-dir", "/guest-dir", type: "virtualbox", disabled: false
+  config.vm.synced_folder "./provision", "/vagrant", disabled: false
 
   # Box spec
   config.vm.provider "virtualbox" do |vb|
